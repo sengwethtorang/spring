@@ -9,7 +9,7 @@
 		<h2 class="btn btn-danger" th:utext="${name}"></h2>
 
 	</div>
-	<ul>
+	<!-- <ul>
 
 		<li th:inline="text">[[${user.name}]]</li>
 		<li th:text="${user.gender}"></li>
@@ -21,7 +21,7 @@
 		<li th:text="*{gender}"></li>
 		<li th:text="*{image}"></li>
 
-	</ul>
+	</ul> -->
 	<table class="table table-bordered">
 		<thead>
 			<tr>
@@ -48,6 +48,6 @@
 </body>
 </html>
 <script th:inline="javascript">
-	var user = [[${user}]];
+	var user = [[${users}]];
 	console.log(user);
 </script>
