@@ -4,23 +4,50 @@
 <link rel="stylesheet" type="text/css" href="css/index.css" />
 <link rel="stylesheet" href="/webjars/bootstrap/3.3.7/css/bootstrap.css" />
 <body>
-<div class=" text-center">
-	<span th:text="#{message.welcome}" >TEST</span>
-	<h2 class="btn btn-danger" th:text="#{message.welcome}"></h2>
-	
-</div>
+	<div class=" text-center">
+		<span th:text="#{message.welcome}">TEST</span>
+		<h2 class="btn btn-danger" th:utext="${name}"></h2>
+
+	</div>
 	<ul>
-		
-		<li th:text="${user.name}"></li>
+
+		<li th:inline="text">[[${user.name}]]</li>
 		<li th:text="${user.gender}"></li>
 		<li th:text="${user.image}"></li>
-		
+
 	</ul>
 	<ul th:object="${user}">
 		<li th:text="*{name}"></li>
 		<li th:text="*{gender}"></li>
 		<li th:text="*{image}"></li>
-		
+
 	</ul>
+	<table class="table table-bordered">
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Name</th>
+				<th>Gender</th>
+			</tr>
+		</thead>
+		<tbody th:each="user :${users}" th:inline="text">
+			<tr>
+				<td>[[${user.id}]]</td>
+				<td>[[${user.name}]]</td>
+				<td>
+				<!-- <span th:if="${user.gender=='M'}" th:text="Male"></span> 
+				<span th:unless="${user.gender=='M'}" th:text="Female"></span> -->
+				<span th:text="${user.gender=='M'?'Male':'Female'}"></span>
+				</td>
+				<td><a th:href="@{|/detail/${user.id}|}" th:text="Link"/></td>
+			</tr>
+			
+		</tbody>
+	</table>
+
 </body>
 </html>
+<script th:inline="javascript">
+	var user = [[${user}]];
+	console.log(user);
+</script>
