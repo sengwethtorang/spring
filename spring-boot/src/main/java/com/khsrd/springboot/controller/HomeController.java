@@ -1,4 +1,4 @@
-package com.khsrd.springboot;
+package com.khsrd.springboot.controller;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 
 import com.khsrd.springboot.model.User;
 import com.khsrd.springboot.service.UserService;
@@ -36,20 +35,42 @@ public class HomeController {
 	@RequestMapping(value = "/detail/{id}")
 	public String about(@PathVariable("id")int id,Model model) {
 		
-		model.addAttribute("user", userService.getUserById(id-1));
+		model.addAttribute("user", userService.getUserById(id));
 		return "about";
 	}
 	
-	@RequestMapping(value ="/input")
+	@RequestMapping(value ="/user/add",method=RequestMethod.GET)
 	public String getInput(Model model) {
 		model.addAttribute("user", new User());
-		return "add";
+		model.addAttribute("status", true);
+		return "edit";
 	}
 	
-	@RequestMapping(value = "/add", method= RequestMethod.POST)
-	@ResponseBody
-	public User getAdd(@ModelAttribute("user") User user) {
-		return user;
+	@RequestMapping(value ="/edit/{id}")
+	public String getInput(Model model,@PathVariable("id")int id) {
+		User user = userService.getUserById(id);
+		model.addAttribute("user", user);
+		model.addAttribute("status", false);
+		return "edit";
+	}
+	@RequestMapping(value="/user/update", method= RequestMethod.POST)
+	public String postUpdate(@ModelAttribute("user") User user) {
+		userService.updateUser(user);
+		//System.out.println("AAAAAAAAAAAAA");
+		return "redirect:/home";
+	}
+	
+	@RequestMapping(value = "/user/add", method= RequestMethod.POST)
+	
+	public String getAdd(@ModelAttribute("user") User user) {
+		userService.addUser(user);
+		return "redirect:/home";
+	}
+	
+	@RequestMapping(value = "/remove/{id}", method= RequestMethod.GET)
+	public String getAdd(@PathVariable("id")int id) {
+		userService.delete(id);
+		return "redirect:/home";
 	}
 	
 	@RequestMapping("/user")//user?name=parameter
@@ -58,11 +79,13 @@ public class HomeController {
 		return name;
 	}
 	
-	@RequestMapping("/user/{id}")
-	@ResponseBody
-	public String getUserId(@PathVariable("id")String id) {
-		return id;
-	}
+//	@RequestMapping("/user/{id}")
+//	@ResponseBody
+//	public String getUserId(@PathVariable("id")String id) {
+//		return id;
+//	}
+	
+	
 	
 	
 //	public void data () {

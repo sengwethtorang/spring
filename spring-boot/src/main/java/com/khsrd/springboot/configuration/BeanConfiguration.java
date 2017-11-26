@@ -1,4 +1,4 @@
-package com.khsrd.springboot;
+package com.khsrd.springboot.configuration;
 
 import java.util.Locale;
 

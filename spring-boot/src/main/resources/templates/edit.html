@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1"/>
+<link rel="stylesheet" href="/webjars/bootstrap/3.3.7/css/bootstrap.css" />
+<link rel="stylesheet" type="text/css" href="css/index.css"/>
+<title>Insert title here</title>
+</head>
+<body>
+
+<div class="container">
+  
+  <form th:action="${status==true?'/user/add':'/user/update'}" method="POST" th:object="${user}">
+    <div class="form-group">
+      <label >Id:</label>
+      <input type="number" class="form-control"   th:field="*{id}"/>
+    </div>
+    <div class="form-group">
+      <label >Name:</label>
+      <input type="text" class="form-control"  th:field="*{name}"/>
+    </div>
+     <div class="form-group">
+      <label >Gender:</label>
+      <input type="text" class="form-control"  th:field="*{gender}"/>
+    </div>
+    <div class="form-group">
+      <label >Image:</label>
+      <input type="text" class="form-control"  th:field="*{image}"/>
+    </div>
+    <button type="submit" class="btn btn-default" th:text="${status==true?'Add User':'Update User'}"></button>
+  </form>
+</div>
+
+
+<!-- <form th:action="${status==true?'/user/add':'/user/update'}" method="POST" th:object="${user}">
+    <div class="form-group">
+      <label >Id:</label>
+      <input type="number" class="form-control"   name="id" th:value="*{id}"/>
+    </div>
+    <div class="form-group">
+      <label >Name:</label>
+      <input type="text" class="form-control"  name="name" th:value="*{name}"/>
+    </div>
+     <div class="form-group">
+      <label >Gender:</label>
+      <input type="text" class="form-control"  name="gender" th:value="*{gender}"/>
+    </div>
+    <div class="form-group">
+      <label >Image:</label>
+      <input type="text" class="form-control"  name="image" th:value="*{image}"/>
+    </div>
+    <button type="submit" class="btn btn-default" th:text="${status==true?'Add User':'Update User'}"></button>
+  </form> -->
+
+<!-- 	<form th:action="${status==true?'user/add':'/user/update'}" method="POST" th:object="${user}">
+		Id<input type="number" th:field="*{id}" th:value="*{id}"/>
+		Name<input type="text" th:field="*{name}" th:value="*{name}"/>
+		Gender<input type="text" th:field="*{gender}" th:value="*{gender}"/>
+		Image<input type="text" th:field="*{image}" th:value="*{image}"/>
+		<button type="submit" class="btn btn-default" th:text="${status==true?'Add User':'Update User'}"></button>
+	</form> -->
+</body>
+</html>
