@@ -1,10 +1,14 @@
 package com.khsrd.springboot.controller;
 
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -62,7 +66,16 @@ public class HomeController {
 	
 	@RequestMapping(value = "/user/add", method= RequestMethod.POST)
 	
-	public String getAdd(@ModelAttribute("user") User user) {
+	public String getAdd(@Valid @ModelAttribute("user") User user,BindingResult result,Model model) {
+		if(result.hasErrors()) {
+			for (FieldError error : result.getFieldErrors()) {
+				System.out.println(error.getField());
+				System.out.println(error.getDefaultMessage());
+			}
+			model.addAttribute("user", user);
+			model.addAttribute("status", true);
+			return "edit";
+		}
 		userService.addUser(user);
 		return "redirect:/home";
 	}

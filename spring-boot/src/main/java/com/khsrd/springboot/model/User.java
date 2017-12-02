@@ -1,8 +1,17 @@
 package com.khsrd.springboot.model;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotEmpty;
+
 public class User {
+	@NotNull
+	@NotEmpty
+
 	private String name;
 	private int id;
+	@Size(min=1,max=1)
 	private String gender;
 	private String image;
 	public String getName() {
