@@ -4,19 +4,12 @@
 <head>
 <meta charset="ISO-8859-1"/>
 <link rel="stylesheet" type="text/css" href="css/index.css"/>
-<style>
-img{
-		width: 100px;
-	}
-</style>
 <title>Insert title here</title>
 </head>
 <body>
-	<ul th:object="${user}">
-		<li th:text="*{name}"></li>
-		<li th:text="*{gender}"></li>
-		<li><img alt="image" th:src="@{${user.image}}"/></li>
-
-	</ul>
+	<form action="/upload" method="post" enctype="multipart/form-data" >
+		<input type="file" name="file"/>
+		<button type="submit">Upload</button>
+	</form>
 </body>
 </html>

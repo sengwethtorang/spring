@@ -51,7 +51,8 @@ public class UserRepositoryImpl implements UserRepository{
 
 	@Override
 	public void updateUser(User user_) {
-		for (int i=1;i<users.size();i++) {
+		for (int i=0;i<users.size();i++) {
+			System.out.println("ID list :"+ users.get(i).getId() +"|"+user_.getId());
 			if(users.get(i).getId()== user_.getId()) {
 				users.set(i, user_);
 				break;
@@ -64,7 +65,7 @@ public class UserRepositoryImpl implements UserRepository{
 	@Override
 	public void delete(int id) {
 		// TODO Auto-generated method stub
-		for (int i=1;i<users.size();i++) {
+		for (int i=0;i<users.size();i++) {
 			if(users.get(i).getId()== id) {
 				users.remove(i);
 				break;
