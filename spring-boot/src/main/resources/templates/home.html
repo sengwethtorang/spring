@@ -1,21 +1,24 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org">
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layouts/default">
 
 <link rel="stylesheet" type="text/css" href="css/index.css" />
 <link rel="stylesheet" href="/webjars/bootstrap/3.3.7/css/bootstrap.css" />
 <style>
-	img{
-		width: 100px;
-	}
+img {
+	width: 100px;
+}
 </style>
 <body>
-	<a class="btn btn-primary" th:href="@{|/user/add|}">Add</a>
-	<div class=" text-center">
-		<span th:text="#{message.welcome}">TEST</span>
-		<!-- 		<h2 class="btn btn-danger" th:utext="${name}"></h2> -->
+	<div class="container" layout:fragment="content">
+		<a class="btn btn-primary" th:href="@{|/user/add|}">Add</a>
+		<div class=" text-center">
+			<span th:text="#{message.welcome}">TEST</span>
+			<!-- 		<h2 class="btn btn-danger" th:utext="${name}"></h2> -->
 
-	</div>
-	<!-- <ul>
+		</div>
+		<!-- <ul>
 
 		<li th:inline="text">[[${user.name}]]</li>
 		<li th:text="${user.gender}"></li>
@@ -28,37 +31,38 @@
 		<li th:text="*{image}"></li>
 
 	</ul> -->
-	<table class="table table-bordered">
-		<thead>
-			<tr>
-				<th>Id</th>
-				<th>Name</th>
-				<th>Gender</th>
-				<th>Image</th>
-				<th>Action</th>
-			</tr>
-		</thead>
-		<tbody th:each="user :${users}" th:inline="text">
-			<tr>
-				<td>[[${user.id}]]</td>
-				<td>[[${user.name}]]</td>
-				<td>
-					<!-- <span th:if="${user.gender=='M'}" th:text="Male"></span> 
+		<table class="table table-bordered">
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>Name</th>
+					<th>Gender</th>
+					<th>Image</th>
+					<th>Action</th>
+				</tr>
+			</thead>
+			<tbody th:each="user :${users}" th:inline="text">
+				<tr>
+					<td>[[${user.id}]]</td>
+					<td>[[${user.name}]]</td>
+					<td>
+						<!-- <span th:if="${user.gender=='M'}" th:text="Male"></span> 
 				<span th:unless="${user.gender=='M'}" th:text="Female"></span> --> <span
-					th:text="${user.gender=='M'?'Male':'Female'}"></span>
-				</td>
-				<td><img alt="image" th:src="@{${user.image}}"></td>
-				<td><a class="btn btn-success" th:href="@{|/detail/${user.id}|}" th:text="Detail">
-				<a class="btn btn-danger" th:href="@{|/remove/${user.id}|}">Remove</a><a
-					th:href="@{|/edit/${user.id}|}" class="btn btn-info">Edit</a></td>
-			</tr>
+						th:text="${user.gender=='M'?'Male':'Female'}"></span>
+					</td>
+					<td><img alt="image" th:src="@{${user.image}}" /></td>
+					<td><a class="btn btn-success"
+						th:href="@{|/detail/${user.id}|}" th:text="Detail"></a> <a
+						class="btn btn-danger" th:href="@{|/remove/${user.id}|}">Remove</a><a
+						th:href="@{|/edit/${user.id}|}" class="btn btn-info">Edit</a></td>
+				</tr>
 
-		</tbody>
-	</table>
-
+			</tbody>
+		</table>
+	</div>
 </body>
 </html>
-<script th:inline="javascript">
+<!-- <script th:inline="javascript">
 	var user = [[${users}]];
 	console.log(user);
-</script>
+</script> -->

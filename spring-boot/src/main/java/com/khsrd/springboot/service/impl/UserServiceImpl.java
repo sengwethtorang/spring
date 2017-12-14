@@ -6,14 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.khsrd.springboot.model.User;
-import com.khsrd.springboot.repository.UserRepository;
+import com.khsrd.springboot.repository.MybatisUserRepository;
 import com.khsrd.springboot.service.UserService;
 
 @Service
 public class UserServiceImpl implements UserService {
 
 	@Autowired
-	private UserRepository userRepository;
+	private MybatisUserRepository userRepository;
 	@Override
 	public List<User> getAllUser() {
 		// TODO Auto-generated method stub
