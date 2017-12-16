@@ -1,5 +1,7 @@
 package com.khsrd.springboot.model;
 
+import java.util.List;
+
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -14,6 +16,15 @@ public class User {
 	@Size(min=1,max=1)
 	private String gender;
 	private String image;
+	private List<Role> roles;
+	
+
+	public List<Role> getRoles() {
+		return roles;
+	}
+	public void setRoles(List<Role> roles) {
+		this.roles = roles;
+	}
 	public String getName() {
 		return name;
 	}

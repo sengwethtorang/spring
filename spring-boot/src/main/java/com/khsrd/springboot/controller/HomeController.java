@@ -5,7 +5,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.khsrd.springboot.model.User;
+import com.khsrd.springboot.service.RoleService;
 import com.khsrd.springboot.service.UploadFileService;
 import com.khsrd.springboot.service.UserService;
 
@@ -27,6 +28,8 @@ public class HomeController {
 	
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private RoleService roleService;
 	@Autowired
 	private UploadFileService uploadFileService;
 	@RequestMapping(value = {"/home","/"})
@@ -48,6 +51,7 @@ public class HomeController {
 	
 	@RequestMapping(value ="/user/add",method=RequestMethod.GET)
 	public String getInput(Model model) {
+		model.addAttribute("roles", roleService.getRoles());
 		model.addAttribute("user", new User());
 		model.addAttribute("status", true);
 		return "edit";
@@ -56,6 +60,7 @@ public class HomeController {
 	@RequestMapping(value ="/edit/{id}")
 	public String getInput(Model model,@PathVariable("id")int id) {
 		User user = userService.getUserById(id);
+		model.addAttribute("roles", roleService.getRoles());
 		model.addAttribute("user", user);
 		model.addAttribute("status", false);
 		return "edit";
@@ -73,7 +78,7 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value = "/user/add", method= RequestMethod.POST)
-	
+	@Transactional
 	public String getAdd(@RequestParam("file") MultipartFile file, @Valid @ModelAttribute("user") User user,BindingResult result,Model model) {
 		if(result.hasErrors()) {
 			for (FieldError error : result.getFieldErrors()) {
@@ -88,6 +93,7 @@ public class HomeController {
 		
 		user.setImage(uploadFileService.uploadFile(file));
 		userService.addUser(user);
+		roleService.saveRole(user.getId(), user.getRoles().get(0).getId());
 		return "redirect:/home";
 	}
 	
