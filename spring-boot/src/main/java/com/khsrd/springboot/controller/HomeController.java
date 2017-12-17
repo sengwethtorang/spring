@@ -65,6 +65,7 @@ public class HomeController {
 		model.addAttribute("status", false);
 		return "edit";
 	}
+	@Transactional
 	@RequestMapping(value="/user/update", method= RequestMethod.POST)
 	public String postUpdate(@ModelAttribute("user") User user, @RequestParam("file") MultipartFile file) {
 		if(file.getSize()!=0 || (!file.isEmpty())) {
@@ -73,6 +74,8 @@ public class HomeController {
 		}
 		System.out.println("Image"+ user.getImage());
 		userService.updateUser(user);
+		roleService.deleteRole(user.getId());
+		roleService.saveRole(user.getId(), user.getRoles().get(0).getId());
 		//System.out.println("AAAAAAAAAAAAA");
 		return "redirect:/home";
 	}

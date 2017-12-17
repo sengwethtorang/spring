@@ -28,4 +28,13 @@ public class RoleServiceImpl implements RoleService{
 		
 	}
 
+	@Override
+	public void deleteRole(int id) {
+		// TODO Auto-generated method stub
+		rolesRepository.delete(id);
+		
+	}
+	
+	
+
 }
