@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layouts/default">
+<head>
+<meta charset="ISO-8859-1" />
+<link rel="stylesheet" type="text/css" href="css/index.css" />
+<link rel="stylesheet" href="/webjars/bootstrap/3.3.7/css/bootstrap.css" />
+
+<title>Insert title here</title>
+</head>
+<body>
+	<div class="container" layout:fragment="content">
+
+		<table class="table">
+			<tr>
+
+				<th th:text="#{message.title}">Title</th>
+				<th th:text="#{message.public.date}">Public Date</th>
+				<th th:text="#{message.author}">Author</th>
+				<th th:text="#{message.page}">Page</th>
+				<th th:text="#{message.publisher}">Publisher</th>
+				<th th:text="#{message.cover.image}">Cover Image</th>
+			</tr>
+			<tr th:object="${book}">
+				
+				<td th:text="*{title}"></td>
+				<td th:text="*{publicDate}"></td>
+				<td th:text="*{author}"></td>
+				<td th:text="*{page}"></td>
+				<td>
+					<ul>
+						<li th:each="publisher : ${book.lists}"
+							th:text="${publisher.name}"></li>
+					</ul>
+				</td>
+				<td><img alt="" th:src="@{${book.coverImage}}" /></td>
+			</tr>
+		</table>
+		<!-- <ul th:object="${book}">
+		<li th:text="*{id}"></li>
+		<li th:text="*{title}"></li>
+		<li th:text="*{author}"></li>
+		<li th:text="*{publicDate}"></li>
+		<li th:text="*{page}"></li>
+		<li><img alt="" th:src="@{${book.coverImage}}"/></li>
+	</ul> -->
+	</div>
+</body>
+</html>

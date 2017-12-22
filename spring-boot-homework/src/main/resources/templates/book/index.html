@@ -1,0 +1,61 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layouts/default">
+
+<link rel="stylesheet" type="text/css" href="css/index.css" />
+<link rel="stylesheet" href="/webjars/bootstrap/3.3.7/css/bootstrap.css" />
+<style>
+
+.imgShow{
+	width : 100px;
+}
+</style>
+<body>
+<div class="container" layout:fragment="content">
+	
+	<a class="btn btn-primary" th:href="@{|/book/add|}"
+		th:text="#{btn.add}">Add</a>
+
+	<table class="table table-bordered">
+		<thead>
+			<tr>
+
+				<th th:text="#{message.id}">Id</th>
+				<th th:text="#{message.title}">Title</th>
+				<th th:text="#{message.public.date}">Public Date</th>
+				<th th:text="#{message.author}">Author</th>
+				<th th:text="#{message.page}">Page</th>
+				<th th:text="#{message.publisher}">Publisher</th>
+				<th th:text="#{message.cover.image}">Cover Image</th>
+				<th th:text="#{message.action}">Action</th>
+				
+			</tr>
+		</thead>
+		<tbody th:each="book :${books}" th:inline="text">
+			<tr>
+				<td>[[${book.id}]]</td>
+				<td>[[${book.title}]]</td>
+				<td>[[${book.publicDate}]]</td>
+				<td>[[${book.author}]]</td>
+				<td>[[${book.page}]]</td>
+				<td>
+					<ul>
+						<li th:each="publisher : ${book.lists}" th:text="${publisher.name}"></li>
+					</ul>
+				</td>
+				
+				<td><img alt="" th:src="@{${book.coverImage}}" class="imgShow"></img></td>
+				<td><a class="btn btn-success"
+					th:href="@{|/detail/${book.id}|}" th:text="#{btn.detail}"></a> <a
+						class="btn btn-danger" th:href="@{|/remove/${book.id}|}"
+						th:text="#{btn.delete}"></a><a th:href="@{|/edit/${book.id}|}"
+						class="btn btn-info"><span th:text="#{btn.edit}"></span></a></td>
+			</tr>
+
+		</tbody>
+	</table>
+</div>
+</body>
+</html>
+
