@@ -18,3 +18,8 @@ insert into tbuser(id, name, gender, image) values(16, 'Kimberly Barton', 'M', '
 insert into tbuser(id, name, gender, image) values(17, 'Bernard Morissette', 'M', 'http://lorempixel.com/100/100/animals/');
 insert into tbuser(id, name, gender, image) values(18, 'Nathan Dibbert MD', 'M', 'http://lorempixel.com/100/100/technics/');
 insert into tbuser(id, name, gender, image) values(19, 'Ms. Simone Johnson', 'M', 'http://lorempixel.com/100/100/cats/');
+insert into tbrole(id,role) values(1,'Admin');
+insert into tbrole(id,role) values(2,'User');
+insert into tbuser_role(user_id,role_id) values (1,1);
+insert into tbuser_role(user_id,role_id) values (1,2);
+insert into tbuser_role(user_id,role_id) values (2,2);

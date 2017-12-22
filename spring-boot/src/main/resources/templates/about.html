@@ -15,12 +15,32 @@ img {
 </head>
 <body>
 	<div class="container" layout:fragment="content">
-		<ul th:object="${user}">
+		<table class ="table">
+			<tr>
+				<th>Name</th>
+				<th>Gender</th>
+				<th>Image</th>
+				<th>Roles</th>
+			</tr>
+			<tr th:object="${user}">
+				<td th:text="*{name}"></td>
+				<td th:text="*{gender}"></td>
+				<td><img alt="image" th:src="@{${user.image}}" /></td>
+				<td>
+					<ul>
+						<li th:each="role : *{roles}" th:text="${role.role}" />
+					</ul>
+				</td>
+			</tr>
+		</table>
+		<!-- <ul th:object="${user}">
 			<li th:text="*{name}"></li>
 			<li th:text="*{gender}"></li>
 			<li><img alt="image" th:src="@{${user.image}}" /></li>
+			<li th:each="role : *{roles}" th:text="${role.role}" />
 
-		</ul>
+
+		</ul> -->
 	</div>
 </body>
 </html>

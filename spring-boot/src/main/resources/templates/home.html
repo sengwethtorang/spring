@@ -3,13 +3,19 @@
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorator="layouts/default">
 
-<link rel="stylesheet" type="text/css" href="css/index.css" />
-<link rel="stylesheet" href="/webjars/bootstrap/3.3.7/css/bootstrap.css" />
+<link rel="stylesheet" type="text/css" href="css/index.css"></link>
+<link rel="stylesheet" href="/webjars/bootstrap/3.3.7/css/bootstrap.css"></link>
+
+<th:block layout:fragment="myStyle">
 <style>
-img {
-	width: 100px;
+.error {
+	color: red;
 }
+img{
+	width: 100px;
+}	
 </style>
+</th:block>
 <body>
 	<div class="container" layout:fragment="content">
 		<a class="btn btn-primary" th:href="@{|/user/add|}">Add</a>
@@ -38,7 +44,9 @@ img {
 					<th>Name</th>
 					<th>Gender</th>
 					<th>Image</th>
+					<th>Role</th>
 					<th>Action</th>
+					
 				</tr>
 			</thead>
 			<tbody th:each="user :${users}" th:inline="text">
@@ -50,7 +58,10 @@ img {
 				<span th:unless="${user.gender=='M'}" th:text="Female"></span> --> <span
 						th:text="${user.gender=='M'?'Male':'Female'}"></span>
 					</td>
-					<td><img alt="image" th:src="@{${user.image}}" /></td>
+					<td><img alt="image" th:src="@{${user.image}}"></img></td>
+					<td><ul>
+				<li th:each="role : ${user.roles}" th:text="${role.role}"></li>
+			</ul></td>
 					<td><a class="btn btn-success"
 						th:href="@{|/detail/${user.id}|}" th:text="Detail"></a> <a
 						class="btn btn-danger" th:href="@{|/remove/${user.id}|}">Remove</a><a
