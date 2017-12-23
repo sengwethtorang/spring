@@ -42,20 +42,18 @@
 					th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}"
 					class="error"></span>
 			</div>
-			<!-- <div class="form-group">
+			<div class="form-group">
 				<label>Role:</label> <select class="form-control" th:field="*{roles[0].id}">
 					<option th:each="r:${roles}" th:value="${r.id}" th:text="${r.role}">
 				</select>
 
-			</div> -->
-			<div class="form-group">
-				<label>Role:</label> <select class="form-control" multiple="multiple">
-					<div th:each="r:${roles}" th:remove="tag">
-						<option th:each="rs:*{roles}" selected th:value="${rs.id}" th:text="${rs.role}"/>
-					</div>
+			</div>
+			<!-- <div class="form-group">
+				<label>Role:</label> <select class="form-control" >
+						<option th:each="rs:*{roles}" th:value="${rs.id}" th:text="${rs.role}">Hello</option>
 				</select>
 
-			</div>
+			</div> -->
 			<div class="form-group">
 				<label>Image:</label>
 			</div>

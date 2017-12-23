@@ -24,7 +24,7 @@ public interface MybatisUserRepository {
 		@Result(property="name", column="name"),
 		@Result(property="gender", column="gender"),
 		@Result(property="image", column="image"),
-		@Result(property="lists", column="id", many = @Many(select="findRoleById"))
+		@Result(property="roles", column="id", many = @Many(select="findRoleById"))
 	})
 	public List<User> getAllUser();
 	

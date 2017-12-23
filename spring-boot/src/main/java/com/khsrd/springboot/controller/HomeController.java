@@ -1,6 +1,8 @@
 package com.khsrd.springboot.controller;
 
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.khsrd.springboot.model.Role;
 import com.khsrd.springboot.model.User;
 import com.khsrd.springboot.service.RoleService;
 import com.khsrd.springboot.service.UploadFileService;
@@ -51,7 +54,9 @@ public class HomeController {
 	
 	@RequestMapping(value ="/user/add",method=RequestMethod.GET)
 	public String getInput(Model model) {
-		model.addAttribute("roles", roleService.getRoles());
+		List<Role> roles = roleService.getRoles();
+		System.out.println("Size :"+roles.size());
+		model.addAttribute("roles", roles);
 		model.addAttribute("user", new User());
 		model.addAttribute("status", true);
 		return "edit";
