@@ -6,6 +6,9 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+
+import com.example.demo.service.CustomUserDetailService;
 
 
 @Configuration
@@ -13,15 +16,20 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 public class ConfigurationMVC extends WebSecurityConfigurerAdapter {
 
 	@Autowired
-	CustomAuthenticationSuccessHandler successHandler;
+	private CustomAuthenticationSuccessHandler successHandler;
+	@Autowired
+	private CustomEntrypoint authenticationEntryPoint;
+	@Autowired
+	private CustomUserDetailService userDetailsService;
 	
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		// TODO Auto-generated method stub
-		auth.inMemoryAuthentication()
-		.withUser("user").password("123").roles("USER").and()
-		.withUser("dba").password("123").roles("DBA").and()
-		.withUser("admin").password("123").roles("ADMIN");
+//		auth.inMemoryAuthentication()
+//		.withUser("user").password("123").roles("USER").and()
+//		.withUser("dba").password("123").roles("DBA").and()
+//		.withUser("admin").password("123").roles("ADMIN");
+		auth.userDetailsService(userDetailsService);
 	}
 	
 //	@Override
@@ -40,11 +48,13 @@ public class ConfigurationMVC extends WebSecurityConfigurerAdapter {
 		
 		// TODO Auto-generated method stub
 		http.formLogin().loginPage("/login").successHandler(successHandler);
-		http.csrf().disable();
+		http.logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"));
+//		http.csrf().disable();
 		http.authorizeRequests()
 		.antMatchers("/admin/**").hasRole("ADMIN")
 		.antMatchers("/dba/**").hasAnyRole("DBA","ADMIN")
 		.antMatchers("/user/**").hasAnyRole("DBA","USER","ADMIN");
+		http.exceptionHandling().authenticationEntryPoint(authenticationEntryPoint);
 	}
 	
 }

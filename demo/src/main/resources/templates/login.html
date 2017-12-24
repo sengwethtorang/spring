@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
 <style>
 form {
 	border: 3px solid #f1f1f1;
@@ -68,12 +69,12 @@ span.psw {
 
 	<h2>Login Form</h2>
 
-	<form action="/login" method="post">
+	<form th:action="@{/login}" th:method="post">
 
 
 		<div class="container">
-			<input type="hidden" name="${_csrf.parameterName}"
-				value="${_csrf.token}" />
+			<!-- <input type="hidden" name="${_csrf.parameterName}"
+				value="${_csrf.token}" /> -->
 				
 				 <label><b>Username</b></label> <input
 				type="text" placeholder="Enter Username" name="username" required />
