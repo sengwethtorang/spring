@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -36,6 +37,11 @@ public class BookController {
 	private UploadFileService uploadFileService;
 	@Autowired
 	private PublisherService publisherService;
+	
+	@GetMapping(value = "/login")
+	public String getLogin(Model model) {
+		return "login";
+	}
 	
 	@RequestMapping(value = {"/home","/"})
 	public String index(Model model) {
