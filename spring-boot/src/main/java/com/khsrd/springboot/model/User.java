@@ -17,8 +17,16 @@ public class User {
 	private String gender;
 	private String image;
 	private List<Role> roles;
+	private String password;
+	
 	
 
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
 	public List<Role> getRoles() {
 		return roles;
 	}

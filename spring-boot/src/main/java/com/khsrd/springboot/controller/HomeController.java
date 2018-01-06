@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -43,6 +44,11 @@ public class HomeController {
 		model.addAttribute("users", userService.getAllUser());
 		model.addAttribute("name", "<b>Hello</b>");
 		return "home";
+	}
+	
+	@GetMapping(value = "/login")
+	public String getLogin(Model model) {
+		return "login";
 	}
 	
 	@RequestMapping(value = "/detail/{id}")

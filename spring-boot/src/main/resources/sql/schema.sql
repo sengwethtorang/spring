@@ -2,7 +2,8 @@ create table tbuser(
 	id serial primary key,
 	name varchar(100),
 	gender varchar(10),
-	image varchar(200)
+	image varchar(200),
+	password varchar(50)
 );
 
 create table tbrole(

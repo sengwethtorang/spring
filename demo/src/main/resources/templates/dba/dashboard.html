@@ -1,2 +1,32 @@
-Hello DBA
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+<meta charset="ISO-8859-1" />
+
+<style>
+img {
+	width: 100px;
+}
+</style>
+<title>Insert title here</title>
+</head>
+<body>
+Hello User
 <a href="/logout">Logout</a>
+<span sec:authentication="principal.user.gender">User Principal</span>
+<div sec:authorize="isAuthenticated()">
+      <p>This content is only shown to authenticated users.</p>
+</div>
+<div sec:authorize="isAnonymous()">
+      <p>This content is only available for unauthenticated user.</p>
+</div>
+<div sec:authorize="hasRole('ROLE_ADMIN')">
+      <p>This content is only shown to administrators.</p>
+</div>
+<div sec:authorize="hasAnyRole('ROLE_USER', 'ROLE_DBA')">
+      <p>This content is only shown to users.</p>
+</div>
+
+</body>
+</html>

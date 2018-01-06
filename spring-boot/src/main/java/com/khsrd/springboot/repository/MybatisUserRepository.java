@@ -47,5 +47,11 @@ public interface MybatisUserRepository {
 
 	@Update("update tbuser set name=#{name}, gender=#{gender}, image=#{image} where id=#{id}")
 	public boolean updateUser(User user);
+	@Select("select id, name, gender,password, image from tbuser where name=#{user}")
+	@Results({
+		@Result(property ="id",column= "id"),
+		@Result(property="roles", column="id", many = @Many(select="findRoleById"))
+	})
+	public User getUserByUserName(String user);
 	
 }

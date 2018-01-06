@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+	  >
 <head>
 	<meta charset="utf-8">
 	 <title layout:title-pattern="$DECORATOR_TITLE - $CONTENT_TITLE">UMS</title>
@@ -11,8 +13,10 @@
 	</th:block>
 </head>
 <body>
+	
+	
 	<nav class="navbar navbar-default" th:replace="fragments/header :: header"></nav>
-
+<div sec:authorize="isAuthenticated()" class="label label-success">HI<span sec:authentication="principal.user.name">User Principal</span>!</div>
 	<div class="container" layout:fragment="content">
 		<!-- <h1>Render content here!!!</h1> -->
 	</div>
