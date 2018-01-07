@@ -15,9 +15,9 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private MybatisUserRepository userRepository;
 	@Override
-	public List<User> getAllUser() {
+	public List<User> getAllUser(int page) {
 		// TODO Auto-generated method stub
-		return userRepository.getAllUser();
+		return userRepository.getAllUser(page);
 	}
 
 	@Override

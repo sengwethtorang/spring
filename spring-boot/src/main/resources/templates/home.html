@@ -14,6 +14,19 @@
 img{
 	width: 100px;
 }	
+.isDisabled {
+pointer-events: none;
+  color: currentColor;
+  cursor: not-allowed;
+  opacity: 0.5;
+  text-decoration: none;
+}
+.not-active {
+  	color: #777;
+	cursor: not-allowed;
+	background-color: #fff;
+	pointer-events: none;
+}
 </style>
 </th:block>
 <body>
@@ -69,7 +82,18 @@ img{
 				</tr>
 
 			</tbody>
+			<tfoot>
+			<tr>
+				<td colspan="6">
+					<ul class="pager">
+						<li th:class="${prevPage <= 1 ? 'disabled':''}"><a th:class="${prevPage <= 1 ? 'not-active':''}" th:href="@{/(page=${prevPage-1})}">Prev</a></li>
+						<li><a th:href="@{/(page=${prevPage+1})}">Next</a></li>
+					</ul>	
+				</td>
+			</tr>
+			</tfoot>
 		</table>
+
 	</div>
 </body>
 </html>

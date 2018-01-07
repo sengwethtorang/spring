@@ -37,12 +37,14 @@ public class HomeController {
 	@Autowired
 	private UploadFileService uploadFileService;
 	@RequestMapping(value = {"/home","/"})
-	public String index(Model model) {
+	public String index(Model model,@RequestParam(required= false ,defaultValue="1") int page) {
 		//this.data();
-		userService.getAllUser();
+		//userService.getAllUser();
 		//model.addAttribute("user", new User());
-		model.addAttribute("users", userService.getAllUser());
+		System.out.println("Page :"+page);
+		model.addAttribute("users", userService.getAllUser(page));
 		model.addAttribute("name", "<b>Hello</b>");
+		model.addAttribute("prevPage", page);
 		return "home";
 	}
 	

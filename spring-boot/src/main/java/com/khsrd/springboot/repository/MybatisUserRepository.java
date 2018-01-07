@@ -18,7 +18,7 @@ import com.khsrd.springboot.model.User;
 @Repository
 public interface MybatisUserRepository {
 
-	@Select("select id, name, gender, image from tbuser order by id")
+	@Select("select id, name, gender, image from tbuser order by id limit 5 offset (#{page}-1)*5")
 	@Results({
 		@Result(property ="id",column= "id"),
 		@Result(property="name", column="name"),
@@ -26,7 +26,7 @@ public interface MybatisUserRepository {
 		@Result(property="image", column="image"),
 		@Result(property="roles", column="id", many = @Many(select="findRoleById"))
 	})
-	public List<User> getAllUser();
+	public List<User> getAllUser(int page);
 	
 	@Select("select r.id, r.role from tbrole r inner join tbuser_role ur on r.id = ur.role_id where ur.user_id = #{id}")
 	public List<Role> findRoleById(int id);
