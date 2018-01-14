@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script>
+	$(document).ready(function() {
+
+		$('#btnCreate').click(function(){
+			var id = $('#id').val();
+			var mess = $('#message').val();
+			
+			var data = JSON.stringify({
+				"id" : id,
+				"message" : mess
+			});
+
+			console.log(data);
+			$.ajax({
+				url : 'http://localhost:8181/messages',
+				method : 'POST',
+				data : data,
+				headers : {
+					"Content-Type" : "application/json"
+				},
+				success : function(resp) {
+					if(resp.status != 200){
+						alert ("Error :" + resp.message);
+						return ;
+					}
+					alert (resp.message);
+					
+				},
+				error : function(error) {
+					console.log("Error :"+error);
+				}
+			})		
+		});
+		
+
+	});
+</script>
+</head>
+<body>
+
+	<div class="container">
+		<h2>Vertical (basic) form</h2>
+		<form>
+			<div class="form-group">
+				<label>id :</label> <input type="number" class="form-control"
+					id="id" placeholder="Enter Id" />
+			</div>
+			<div class="form-group">
+				<label>Message :</label> <input type="text" class="form-control"
+					id="message" placeholder="Enter Message" />
+			</div>
+
+			<button type="button" class="btn btn-default" id="btnCreate">Submit</button>
+		</form>
+	</div>
+
+</body>
+</html>
